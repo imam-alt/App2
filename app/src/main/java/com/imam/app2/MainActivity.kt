@@ -108,8 +108,9 @@ class MainActivity : AppCompatActivity() {
         val folder = File(cacheDir, "images")
         folder.mkdirs()
         val imageFile = File.createTempFile("measure_", ".jpg", folder)
-        currentPhotoUri = FileProvider.getUriForFile(this, applicationContext.packageName + ".provider", imageFile)
-        capturePhoto.launch(currentPhotoUri)
+        val photoUri = FileProvider.getUriForFile(this, applicationContext.packageName + ".provider", imageFile)
+        currentPhotoUri = photoUri
+        capturePhoto.launch(photoUri)
     }
 
     private fun loadCapturedImage() {
@@ -132,8 +133,8 @@ class MainActivity : AppCompatActivity() {
         val chars = cameraManager.getCameraCharacteristics(cameraId)
         val focalLengthMm = chars.get(CameraCharacteristics.LENS_INFO_AVAILABLE_FOCAL_LENGTHS)?.firstOrNull() ?: return null
         val sensorSize = chars.get(CameraCharacteristics.SENSOR_INFO_PHYSICAL_SIZE) ?: return null
-        val sensorWidthMm = max(sensorSize.width, 0.0001f)
-        return focalLengthMm * imageWidthPx / sensorWidthMm
+        val sensorWidthMm = max(sensorSize.width, 0.0001f).toDouble()
+        return focalLengthMm.toDouble() * imageWidthPx.toDouble() / sensorWidthMm
     }
 
     private fun toast(message: String) {
