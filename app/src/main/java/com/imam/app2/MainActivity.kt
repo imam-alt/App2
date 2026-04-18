@@ -115,7 +115,7 @@ class MainActivity : AppCompatActivity() {
                 .setTargetRotation(Surface.ROTATION_0)
                 .build()
                 .also {
-                    it.surfaceProvider = binding.previewView.surfaceProvider
+                    it.setSurfaceProvider(binding.previewView.surfaceProvider)
                 }
 
             imageCapture = ImageCapture.Builder()
