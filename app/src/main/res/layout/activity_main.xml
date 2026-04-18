@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,88 +10,147 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <com.imam.app2.MeasurementImageView
-            android:id="@+id/measurementView"
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="320dp"
-            android:adjustViewBounds="true"
-            android:background="#EEEEEE"
-            android:contentDescription="Measurement preview"
-            android:scaleType="fitCenter" />
+            android:layout_height="wrap_content"
+            app:cardUseCompatPadding="true">
 
-        <Button
-            android:id="@+id/btnCapture"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <androidx.camera.view.PreviewView
+                    android:id="@+id/previewView"
+                    android:layout_width="match_parent"
+                    android:layout_height="420dp"
+                    android:contentDescription="Camera preview" />
+
+                <TextView
+                    android:id="@+id/tvZoomLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="Zoom kamera: 1.0x"
+                    android:textStyle="bold" />
+
+                <SeekBar
+                    android:id="@+id/seekZoom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="100"
+                    android:progress="0" />
+
+                <Button
+                    android:id="@+id/btnCapture"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Ambil Foto Portrait" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="Ambil Foto" />
+            app:cardUseCompatPadding="true">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etKnownSizeCm"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ukuran referensi nyata (cm)"
-                android:inputType="numberDecimal" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:orientation="vertical"
+                android:padding="12dp">
 
-        <Button
-            android:id="@+id/btnSetKnown"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Tetapkan Garis Aktif Sebagai Referensi" />
+                <com.imam.app2.MeasurementImageView
+                    android:id="@+id/measurementView"
+                    android:layout_width="match_parent"
+                    android:layout_height="420dp"
+                    android:adjustViewBounds="true"
+                    android:background="#EEEEEE"
+                    android:contentDescription="Measurement preview"
+                    android:scaleType="fitCenter" />
 
-        <Button
-            android:id="@+id/btnEstimateUnknown"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Estimasi Ukuran Garis Aktif" />
+                <Spinner
+                    android:id="@+id/spinnerCommonObject"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp">
+                <Button
+                    android:id="@+id/btnEstimateCommon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Perkirakan Ukuran Umum Objek Aktif" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etActualSizeForDistanceCm"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Ukuran nyata garis aktif untuk hitung jarak (cm)"
-                android:inputType="numberDecimal" />
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp">
 
-        <Button
-            android:id="@+id/btnEstimateDistance"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Hitung Jarak Kamera ke Objek" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etKnownSizeCm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Ukuran referensi nyata (cm)"
+                        android:inputType="numberDecimal" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
-            android:id="@+id/btnReset"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Reset Garis" />
+                <Button
+                    android:id="@+id/btnSetKnown"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tetapkan Garis Aktif Sebagai Referensi" />
 
-        <TextView
-            android:id="@+id/tvInstructions"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Cara pakai:\n1. Ambil foto.\n2. Ketuk 2 titik pada objek referensi.\n3. Isi ukuran aslinya, lalu tekan tombol referensi.\n4. Ketuk 2 titik pada objek lain untuk estimasi ukuran.\n5. Untuk jarak, isi ukuran nyata garis aktif atau gunakan hasil estimasi ukuran."
-            android:textSize="14sp" />
+                <Button
+                    android:id="@+id/btnEstimateUnknown"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Estimasi Ukuran Garis Aktif" />
 
-        <TextView
-            android:id="@+id/tvResult"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Hasil akan muncul di sini"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp">
 
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etActualSizeForDistanceCm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Ukuran nyata garis aktif untuk hitung jarak (cm)"
+                        android:inputType="numberDecimal" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/btnEstimateDistance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Hitung Jarak Kamera ke Objek" />
+
+                <Button
+                    android:id="@+id/btnReset"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Reset Garis" />
+
+                <TextView
+                    android:id="@+id/tvInstructions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Cara pakai:\n1. Kamera selalu portrait.\n2. Gunakan slider zoom sebelum ambil foto.\n3. Ambil foto, lalu ketuk 2 titik pada objek aktif.\n4. Untuk benda umum, pilih kategori lalu tekan tombol perkiraan ukuran umum.\n5. Untuk hasil lebih presisi, pakai objek referensi nyata.\n6. Setelah ukuran aktif terisi, tekan hitung jarak." />
+
+                <TextView
+                    android:id="@+id/tvResult"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Hasil akan muncul di sini"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 </ScrollView>
